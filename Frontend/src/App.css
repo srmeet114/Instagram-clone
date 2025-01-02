@@ -1,0 +1,11 @@
+/* styles.css */
+.instagram {
+  @apply bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888];
+}
+.bg_bolar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
