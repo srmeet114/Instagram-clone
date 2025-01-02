@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000";
+const URL = "https://instagram-clone-saf1.onrender.com";
 
 axios.interceptors.request.use(
   (config) => {
@@ -101,7 +101,6 @@ export const postShareapi = async (
 export const GetPosts = async (setGpostsdata) => {
   try {
     const res = await axios.get(`${URL}/allposts`);
-    console.log(res.data);
     setGpostsdata(res.data.posts);
   } catch (err) {
     console.error(err);
@@ -113,7 +112,6 @@ export const GetPosts = async (setGpostsdata) => {
 export const GetProfie = async (setpost,setuser) => {
   try {
     const res = await axios.get(`${URL}/user/${JSON.parse(localStorage.getItem("user"))._id}`);
-    console.log(res.data);
     setpost(res.data.post)
     setuser(res.data.user)
   } catch (err) {
@@ -215,7 +213,6 @@ export const DeletePost = async (
   try {
     const res = await axios.delete(`${URL}/deletePost/${_id}`);
     notify(res.data.message);
-    console.log(res.data);
     ClosetComment();
     navigate("/");
   } catch (err) {
@@ -229,7 +226,6 @@ export const DeletePost = async (
 export const ProfileData = async (_id, setUser, setPosts, setisFollow) => {
   try {
     const res = await axios.get(`${URL}/user/${_id}`);
-    console.log(res.data);
     setUser(res.data.user);
     setPosts(res.data.post);
     if (
@@ -249,7 +245,6 @@ export const ProfileData = async (_id, setUser, setPosts, setisFollow) => {
 export const FollowUser = async (_id, setisFollow) => {
   try {
     const res = await axios.put(`${URL}/follow`, { followId: _id });
-    console.log(res);
     setisFollow(true);
   } catch (err) {
     console.log(err);
@@ -261,7 +256,6 @@ export const FollowUser = async (_id, setisFollow) => {
 export const UnFollowUser = async (_id, setisFollow) => {
   try {
     const res = await axios.put(`${URL}/unfollow`, { followId: _id });
-    console.log(res);
     setisFollow(false);
   } catch (err) {
     console.log(err);
@@ -285,8 +279,6 @@ export const postPic = async (url,close) => {
   try {
     const res = await axios.put(`${URL}/uploadProfilePic`, { pic: url });
     console.log(res);
-    // setImage(null);
-    // setUrl("");
     close();
     window.location.reload();
   } catch (err) {

@@ -62,17 +62,16 @@ const Profie = () => {
         </div>
         <hr className="w-[90%] m-[auto] opacity-[0.8]  my-[15px] mx-[auto]" />
         <div className="gallery flex flex-wrap">
-          {post.map((e, index) => {
-            return (
-              <img
-                onClick={() => OpnePostDetails(e)}
-                key={index}
-                className="w-[30%] p-[10px]"
-                src={e.photo}
-                alt=""
-              />
-            );
-          })}
+        {Array.isArray(post) && post.map((e, index) => (
+  <img
+    onClick={() => OpnePostDetails(e)}
+    key={index}
+    className="w-[30%] p-[10px]"
+    src={e.photo}
+    alt=""
+  />
+))}
+
         </div>
       </div>
       {sow && <PostDetail itemsData={post} ClosetComment={ClosePostDetails}/>}

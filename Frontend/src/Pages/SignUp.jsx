@@ -18,23 +18,6 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log("Form Submitted", data);
-    // fetch("http://localhost:5000/signup", {
-    //   method: "post",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: data.name,
-    //     userName: data.userName,
-    //     email: data.email,
-    //     password: data.password,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   });
     postSignUpData(data,reset,notify,notifyerr,navigate);
   };
 
