@@ -92,7 +92,7 @@ const Navbar = ({ login }) => {
   };
 
   return (
-    <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0">
+    <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0 z-10">
 
       <Link to={"/"}>
         <img

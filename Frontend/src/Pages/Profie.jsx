@@ -38,7 +38,7 @@ const Profie = () => {
   };
 
   return (
-    <div className="pt-16 flex justify-center ">
+    <div className="pt-16 max-[800px]:pt-0 flex justify-center ">
       <div className="max-w-[600px] h-max border rounded-lg">
         <div className="flex justify-around p-5">
           <div className="h-fit">
