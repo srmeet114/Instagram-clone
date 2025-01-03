@@ -68,7 +68,7 @@ router.post("/googleLogin",(req,res)=>{
   if(email_verified){
     USER.findOne({email:email}).then((savedUser)=>{
       if(savedUser){
-        const token = jwt.sign({_id:savedUser._id},tokens)
+        const token = jwt.sign({_id:savedUser._id},jwtDetail)
         const {_id,name,email,userName} = savedUser;
         res.status(200).json({token,message:"Successfully signed in",user:{_id,name,email,userName}})
       }else{

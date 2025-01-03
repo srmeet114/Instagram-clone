@@ -28,7 +28,6 @@ const SignUp = () => {
   const continueWithGoogle = (credentialResponse) => {
     const jwtDetail = jwtDecode(credentialResponse.credential);
     console.log(jwtDetail);
-    console.log(credentialResponse.clientId);
     
     GoogleLogins(jwtDetail,setUserLogin,notify,notifyerr,navigate,credentialResponse)
   };
