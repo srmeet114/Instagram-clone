@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "https://instagram-clone-saf1.onrender.com";
+const URL = "http://localhost:5000";
 
 axios.interceptors.request.use(
   (config) => {
@@ -100,13 +100,12 @@ export const GoogleLogins = async (jwtDetail,setUserLogin,notify,notifyerr,navig
   try {
     const res = await axios.post(`${URL}/googleLogin`, {
       name: jwtDetail.name,
-      userName: jwtDetail,
+      userName: jwtDetail.given_name + jwtDetail.family_name ,
       email: jwtDetail.email,
       email_verified: jwtDetail.email_verified,
       clientId: credentialResponse.clientId,
       Photo: jwtDetail.picture,
     });
-    console.log(res);
     notify(res.data.message);
     localStorage.setItem("jwt", res.data.token);
     localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -120,10 +119,11 @@ export const GoogleLogins = async (jwtDetail,setUserLogin,notify,notifyerr,navig
 
 // GetPost Share
 
-export const GetPosts = async (setGpostsdata) => {
+export const GetPosts = async (Gpostsdata,setGpostsdata,limit,skip) => {
   try {
-    const res = await axios.get(`${URL}/allposts`);
-    setGpostsdata(res.data.posts);
+    const res = await axios.get(`${URL}/allposts?limit=${limit}&skip=${skip}`);
+    // setGpostsdata(...Gpostsdata,...res.data.posts);
+    setGpostsdata((Gpostsdata)=>[...Gpostsdata,...res.data.posts]);
   } catch (err) {
     console.error(err);
   }
@@ -266,23 +266,27 @@ export const ProfileData = async (_id, setUser, setPosts, setisFollow) => {
 
 // Follow user
 
-export const FollowUser = async (_id, setisFollow) => {
+export const FollowUser = async (_id, setisFollow,notify,notifyerr) => {
   try {
     const res = await axios.put(`${URL}/follow`, { followId: _id });
+    notify(res.data.message);
     setisFollow(true);
   } catch (err) {
     console.log(err);
+    notifyerr(err.response.data.error);
   }
 };
 
 // Follow user
 
-export const UnFollowUser = async (_id, setisFollow) => {
+export const UnFollowUser = async (_id, setisFollow,notify,notifyerr) => {
   try {
     const res = await axios.put(`${URL}/unfollow`, { followId: _id });
+    notify(res.data.message);
     setisFollow(false);
   } catch (err) {
     console.log(err);
+    notifyerr(err.response.data.error);
   }
 };
 

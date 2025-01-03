@@ -8,10 +8,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const tokens = process.env.jwtSecret;
 
-router.get("/", (req, res) => {
-  res.send({ message: "Hello World!" });
-});
-
 router.post("/signup", (req, res) => {
   const { name, userName, email, password } = req.body; // Destructuring the request body
   if(!name || !userName || !email || !password){ // Checking all the fields are present

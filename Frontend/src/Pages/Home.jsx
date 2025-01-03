@@ -25,6 +25,8 @@ const Home = () => {
   const [comment, setcomment] = useState("");
   const [OpneComment, setOpneComment] = useState(false);
   const [itemsData, setitemsData] = useState([]);
+  const limit = 10;
+  const skip = 0;
 
   const OpnetComment = (e) => {
     setOpneComment(true);
@@ -37,11 +39,22 @@ const Home = () => {
 
   useEffect(() => {
     GetPost();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const GetPost = () => {
-    GetPosts(setGpostsdata);
+    GetPosts(Gpostsdata,setGpostsdata,limit,skip);
   };
+
+  const handleScroll = () => {
+    if(document.documentElement.clientHeight + window.pageYOffset >= document.documentElement.scrollHeight){
+      skip = skip + 10;
+      GetPost();
+    }
+  }
 
   const likesPost = (id) => {
     likePost(id, Gpostsdata, setGpostsdata);

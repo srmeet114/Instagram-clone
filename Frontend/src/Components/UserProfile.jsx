@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { FollowUser, ProfileData, UnFollowUser } from "../server/Api/api";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
+  const userimg =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+  const notify = (message) => toast.success(message);
+  const notifyerr = (message) => toast.error(message);
 
-  const userimg = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-  
   const { _id } = useParams();
-  const [isFollow, setisFollow] = useState(false)
+  const [isFollow, setisFollow] = useState(false);
   useEffect(() => {
     GetProfieData();
   }, [isFollow]);
 
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
-console.log(user);
-
-  const OpnePostDetails = (e) => {
-    setsow(true);
-  };
-
-  const ClosePostDetails = () => {
-    setsow(false);
-  };
 
   const GetProfieData = () => {
-    ProfileData(_id, setUser, setPosts,setisFollow);
+    ProfileData(_id, setUser, setPosts, setisFollow);
   };
 
   // Follow user
 
   const FollowUsers = (_id) => {
-    FollowUser(_id,setisFollow);
+    FollowUser(_id, setisFollow,notify,notifyerr);
   };
 
   // unFollow user
 
   const UnFollowUsers = (_id) => {
-    UnFollowUser(_id,setisFollow);
+    UnFollowUser(_id, setisFollow,notify,notifyerr);
   };
 
   return (
@@ -56,16 +50,27 @@ console.log(user);
               <h2 className="text-4xl font-semibold text-center">
                 {user.name}
               </h2>
-              <button 
-              onClick={()=> {if(isFollow){UnFollowUsers(user._id)}else{FollowUsers(user._id)}}}
-              className="bg-[#0115ed] text-white px-4 py-1 rounded-lg ease-in duration-200 hover:scale-[1.2] hover:shadow-xl active:scale-[1]">
+              <button
+                onClick={() => {
+                  if (isFollow) {
+                    UnFollowUsers(user._id);
+                  } else {
+                    FollowUsers(user._id);
+                  }
+                }}
+                className="bg-[#0115ed] text-white px-4 py-1 rounded-lg ease-in duration-200 hover:scale-[1.2] hover:shadow-xl active:scale-[1]"
+              >
                 {isFollow ? "Unfollow" : "Follow"}
               </button>
             </div>
             <div className="flex">
               <p className="px-2 font-medium">{posts.length} posts</p>
-              <p className="px-2 font-medium">{user.followers ? user.followers.length:"0"} followers</p>
-              <p className="px-2 font-medium">{user.followimg ? user.followimg.length:"0"} following</p>
+              <p className="px-2 font-medium">
+                {user.followers ? user.followers.length : "0"} followers
+              </p>
+              <p className="px-2 font-medium">
+                {user.followimg ? user.followimg.length : "0"} following
+              </p>
             </div>
           </div>
         </div>
@@ -74,7 +79,6 @@ console.log(user);
           {posts.map((e, index) => {
             return (
               <img
-                onClick={() => OpnePostDetails(e)}
                 key={index}
                 className="w-[30%] p-[10px]"
                 src={e.photo}

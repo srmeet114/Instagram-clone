@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { MdMood } from "react-icons/md";
+import { MdClose, MdMood } from "react-icons/md";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import { DeletePost } from "../server/Api/api";
+import { DeletePost, postComment } from "../server/Api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const PostDetail = ({ itemsData, ClosetComment }) => {
-
+const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
   const notify = (message) => toast.success(message);
   const notifyerr = (message) => toast.error(message);
   const navigate = useNavigate();
 
   const RemovePost = (_id) => {
-    if(window.confirm("Are you sure you want to delete this post?")){
-        DeletePost(_id,notify,notifyerr,navigate,ClosetComment);
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      DeletePost(_id, notify, notifyerr, navigate, ClosetComment);
     }
   };
 
@@ -33,16 +32,19 @@ const PostDetail = ({ itemsData, ClosetComment }) => {
             <div className="flex items-center">
               <img
                 className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
-                src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={userData.Photo}
                 alt=""
               />
-              <p className="text-lg p-[11px]">{itemsData.postedBy.name}</p>
+              <p className="text-lg p-[11px]">{userData.name}</p>
             </div>
-            <div className="mr-5">
+            <div className="mr-5 flex items-center">
               <RiDeleteBin6Fill
                 onClick={() => RemovePost(itemsData._id)}
                 className="text-2xl"
               />
+              <div className="ml-3">
+                <MdClose onClick={() =>setsow(false)} className="text-2xl" />
+              </div>
             </div>
           </div>
           <div className="comment-section flex-grow-[4] h-10 overflow-y-auto">
@@ -61,26 +63,26 @@ const PostDetail = ({ itemsData, ClosetComment }) => {
             <p>{itemsData.likes.length} like</p>
             <p>{itemsData.body}</p>
           </div>
-          <div className="flex justify-between items-center">
+          {/* <div className="flex justify-between items-center">
             <div className="flex items-center">
               <MdMood className="text-2xl" />
               <input
                 className="outline-none p-[10px] w-full"
                 type="text"
-                // value={comment}
-                // onChange={(e) => setcomment(e.target.value)}
+                value={comment}
+                onChange={(e) => setcomment(e.target.value)}
                 placeholder="Add a comment..."
               />
             </div>
             <button
-              //   onClick={() => {
-              //     makeComment(comment, itemsData._id), ClosetComment();
-              //   }}
+                onClick={() => {
+                  makeComment(comment, itemsData._id), ClosetComment();
+                }}
               className="font-medium px-3 text-[#63afe3]"
             >
               Post
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="close-comment fixed top-[3%] right-[5%]">

@@ -4,8 +4,8 @@ import PostDetail from "../Components/PostDetail";
 import ProfilePic from "../Modal/ProfilePic";
 
 const Profie = () => {
-
-  const userimg = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+  const userimg =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
   useEffect(() => {
     GetProfieData();
@@ -13,28 +13,28 @@ const Profie = () => {
 
   const [sow, setsow] = useState(false);
   const [post, setpost] = useState([]);
-  const [user, setuser] = useState("")
-  const [changePic, setchangePic] = useState(false)
+  const [user, setuser] = useState("");
+  const [changePic, setchangePic] = useState(false);
 
   const OpnePostDetails = (e) => {
     setsow(true);
     setpost(e);
   };
 
-  const ClosePostDetails = () =>{
+  const ClosePostDetails = () => {
     setsow(false);
-  }
+  };
 
-  const ChnageProfileOpne = () =>{
-    setchangePic(true)
-  }
-  
-  const ChnageProfileClose = () =>{
-    setchangePic(false)
-  }
+  const ChnageProfileOpne = () => {
+    setchangePic(true);
+  };
+
+  const ChnageProfileClose = () => {
+    setchangePic(false);
+  };
 
   const GetProfieData = () => {
-    GetProfie(setpost,setuser,ChnageProfileClose);
+    GetProfie(setpost, setuser, ChnageProfileClose);
   };
 
   return (
@@ -54,28 +54,34 @@ const Profie = () => {
               {JSON.parse(localStorage.getItem("user")).name}
             </h2>
             <div className="flex">
-              <p className="px-2 font-medium">{post ? post.length:"0"} posts</p>
-              <p className="px-2 font-medium">{user.followers? user.followers.length:"0"} followers</p>
-              <p className="px-2 font-medium">{user.following? user.following.length:"0"} following</p>
+              <p className="px-2 font-medium">
+                {post ? post.length : "0"} posts
+              </p>
+              <p className="px-2 font-medium">
+                {user.followers ? user.followers.length : "0"} followers
+              </p>
+              <p className="px-2 font-medium">
+                {user.following ? user.following.length : "0"} following
+              </p>
             </div>
           </div>
         </div>
         <hr className="w-[90%] m-[auto] opacity-[0.8]  my-[15px] mx-[auto]" />
         <div className="gallery flex flex-wrap">
-        {Array.isArray(post) && post.map((e, index) => (
-  <img
-    onClick={() => OpnePostDetails(e)}
-    key={index}
-    className="w-[30%] p-[10px]"
-    src={e.photo}
-    alt=""
-  />
-))}
-
+          {Array.isArray(post) &&
+            post.map((e, index) => (
+              <img
+                onClick={() => OpnePostDetails(e)}
+                key={index}
+                className="w-[30%] p-[10px]"
+                src={e.photo}
+                alt=""
+              />
+            ))}
         </div>
       </div>
-      {sow && <PostDetail itemsData={post} ClosetComment={ClosePostDetails}/>}
-      {changePic && <ProfilePic close={ChnageProfileClose}/>}
+      {sow && <PostDetail itemsData={post} userData={user} ClosetComment={ClosePostDetails} setsow={setsow} />}
+      {changePic && <ProfilePic close={ChnageProfileClose} />}
     </div>
   );
 };
