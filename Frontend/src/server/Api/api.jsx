@@ -96,6 +96,28 @@ export const postShareapi = async (
   }
 };
 
+export const GoogleLogins = async (jwtDetail,setUserLogin,notify,notifyerr,navigate,credentialResponse) => {
+  try {
+    const res = await axios.post(`${URL}/googleLogin`, {
+      name: jwtDetail.name,
+      userName: jwtDetail,
+      email: jwtDetail.email,
+      email_verified: jwtDetail.email_verified,
+      clientId: credentialResponse.clientId,
+      Photo: jwtDetail.picture,
+    });
+    console.log(res);
+    notify(res.data.message);
+    localStorage.setItem("jwt", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    setUserLogin(true);
+    navigate("/");
+  } catch (err) {
+    console.log(err);
+    notifyerr(err);
+  }
+};
+
 // GetPost Share
 
 export const GetPosts = async (setGpostsdata) => {
@@ -109,11 +131,13 @@ export const GetPosts = async (setGpostsdata) => {
 
 // GetProfie Data
 
-export const GetProfie = async (setpost,setuser) => {
+export const GetProfie = async (setpost, setuser) => {
   try {
-    const res = await axios.get(`${URL}/user/${JSON.parse(localStorage.getItem("user"))._id}`);
-    setpost(res.data.post)
-    setuser(res.data.user)
+    const res = await axios.get(
+      `${URL}/user/${JSON.parse(localStorage.getItem("user"))._id}`
+    );
+    setpost(res.data.post);
+    setuser(res.data.user);
   } catch (err) {
     console.log(err);
   }
@@ -273,9 +297,9 @@ export const GetFollowingPost = async (setGpostsdata) => {
   }
 };
 
-export const postPic = async (url,close) => {
+export const postPic = async (url, close) => {
   console.log(url);
-  
+
   try {
     const res = await axios.put(`${URL}/uploadProfilePic`, { pic: url });
     console.log(res);
@@ -284,5 +308,4 @@ export const postPic = async (url,close) => {
   } catch (err) {
     console.log(err);
   }
-  
-}
+};

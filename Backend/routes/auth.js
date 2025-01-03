@@ -63,4 +63,37 @@ router.post("/signin",(req,res)=>{
     })
 })
 
+router.post("/googleLogin",(req,res)=>{
+  const {email_verified,email,name,clientId,userName,Photo}=req.body;
+  if(email_verified){
+    USER.findOne({email:email}).then((savedUser)=>{
+      if(savedUser){
+        const token = jwt.sign({_id:savedUser._id},tokens)
+        const {_id,name,email,userName} = savedUser;
+        res.status(200).json({token,message:"Successfully signed in",user:{_id,name,email,userName}})
+      }else{
+        const password = email + clientId
+        const user = new USER({
+          name,
+          userName,
+          email,
+          password: password,
+          Photo
+        });
+      
+        user.save().then((user) => { // Saving the user to the database
+          let userId = user._id.toString()
+          const token = jwt.sign({_id:userId},tokens)
+          const {_id,name,email,userName} = user;
+          res.status(200).json({token,message:"Successfully signed in",user:{_id,name,email,userName}})
+          }).catch((err) => {
+            console.log(err);
+          }); 
+      }
+  }).catch(err=>{
+      console.log(err)
+  })
+  }
+})
+
 module.exports = router;

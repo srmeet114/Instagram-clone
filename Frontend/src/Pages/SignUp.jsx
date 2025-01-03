@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../../public/Img/logo.png";
-import { Link , useNavigate} from "react-router-dom";
-import { postSignUpData } from "../server/Api/api";
-import { toast } from 'react-toastify';
+import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogins, postSignUpData } from "../server/Api/api";
+import { GoogleLogin } from "@react-oauth/google";
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
+import { LoginContext } from "../context/loginContext";
 
 const SignUp = () => {
+  const {setUserLogin} = useContext(LoginContext);
   const {
     register,
     handleSubmit,
@@ -18,7 +22,15 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    postSignUpData(data,reset,notify,notifyerr,navigate);
+    postSignUpData(data, reset, notify, notifyerr, navigate);
+  };
+
+  const continueWithGoogle = (credentialResponse) => {
+    const jwtDetail = jwtDecode(credentialResponse.credential);
+    console.log(jwtDetail);
+    console.log(credentialResponse.clientId);
+    
+    GoogleLogins(jwtDetail,setUserLogin,notify,notifyerr,navigate,credentialResponse)
   };
 
   return (
@@ -136,6 +148,16 @@ const SignUp = () => {
                   Sign In
                 </Link>
               </p>
+              <div className="flex justify-center mt-3">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    continueWithGoogle(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
