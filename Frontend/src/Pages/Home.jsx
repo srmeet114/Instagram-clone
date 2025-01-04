@@ -8,8 +8,8 @@ import { IoCloseSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
 
 const Home = () => {
-
-  const userimg = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+  const userimg =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -46,15 +46,18 @@ const Home = () => {
   }, []);
 
   const GetPost = () => {
-    GetPosts(Gpostsdata,setGpostsdata,limit,skip);
+    GetPosts(Gpostsdata, setGpostsdata, limit, skip);
   };
 
   const handleScroll = () => {
-    if(document.documentElement.clientHeight + window.pageYOffset >= document.documentElement.scrollHeight){
+    if (
+      document.documentElement.clientHeight + window.pageYOffset >=
+      document.documentElement.scrollHeight
+    ) {
       skip = skip + 10;
       GetPost();
     }
-  }
+  };
 
   const likesPost = (id) => {
     likePost(id, Gpostsdata, setGpostsdata);
@@ -65,7 +68,15 @@ const Home = () => {
   };
 
   const makeComment = (text, id) => {
-    postComment(text, id, setcomment, Gpostsdata, setGpostsdata,notify,notifyerr);
+    postComment(
+      text,
+      id,
+      setcomment,
+      Gpostsdata,
+      setGpostsdata,
+      notify,
+      notifyerr
+    );
   };
 
   return (
@@ -74,10 +85,10 @@ const Home = () => {
         return (
           <div
             key={index}
-            className="max-w-[500px] h-max border rounded-lg my-3"
+            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border rounded-lg my-3 px-3"
           >
             <div className="flex items-center">
-              <div className="">
+              <div>
                 <img
                   className="rounded-full w-[30px] h-[auto] m-[5px] object-contain"
                   src={e.postedBy.Photo ? e.postedBy.Photo : userimg}
@@ -85,11 +96,10 @@ const Home = () => {
                 />
               </div>
               <p className="text-lg p-[11px]">
-                
                 <Link to={`profile/${e.postedBy._id}`}>{e.postedBy.name}</Link>
               </p>
             </div>
-            <div className="w-full">
+            <div className=" flex justify-center">
               <img src={e.photo} alt="" />
             </div>
             <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
@@ -142,24 +152,32 @@ const Home = () => {
       })}
       {OpneComment && (
         <div className="showComment w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)]">
-          <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden">
-            <div className="postPic bg-black flex items-center ">
+          <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden max-[600px]:flex-col">
+            <div className="postPic bg-black flex items-center max-[600px]:h-1/2 max-[600px]:justify-center">
               <img
-                className="object-contain w-full "
+                className="object-contain w-full max-[600px]:w-auto"
                 src={itemsData.photo}
                 alt=""
               />
             </div>
             <div className="datails w-full h-[inherit] flex flex-col">
-              <div className="flex items-center border-b">
-                <div className="">
-                  <img
-                    className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
-                    src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt=""
-                  />
+              <div className="flex items-center justify-between border-b">
+                <div className="flex items-center">
+                  <div>
+                    <img
+                      className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
+                      src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      alt=""
+                    />
+                  </div>
+                  <p className="text-lg p-[11px]">lalo</p>
                 </div>
-                <p className="text-lg p-[11px]">lalo</p>
+                <button
+                  onClick={() => ClosetComment()}
+                  className=" text-2xl font-bold cursor-pointer pr-3"
+                >
+                  <IoCloseSharp />
+                </button>
               </div>
               <div className="comment-section flex-grow-[4] h-10 overflow-y-auto">
                 {itemsData.comments.map((e, index) => {
@@ -198,14 +216,6 @@ const Home = () => {
                 </button>
               </div>
             </div>
-          </div>
-          <div className="close-comment fixed top-[3%] right-[5%]">
-            <button
-              onClick={() => ClosetComment()}
-              className="text-white text-2xl font-bold cursor-pointer"
-            >
-              <IoCloseSharp />
-            </button>
           </div>
         </div>
       )}

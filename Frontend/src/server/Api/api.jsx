@@ -123,7 +123,7 @@ export const GetPosts = async (Gpostsdata,setGpostsdata,limit,skip) => {
   try {
     const res = await axios.get(`${URL}/allposts?limit=${limit}&skip=${skip}`);
     // setGpostsdata(...Gpostsdata,...res.data.posts);
-    setGpostsdata((Gpostsdata)=>[...Gpostsdata,...res.data.posts]);
+    setGpostsdata((data)=>[...data,...res.data.posts]);
   } catch (err) {
     console.error(err);
   }

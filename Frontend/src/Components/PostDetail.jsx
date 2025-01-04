@@ -19,10 +19,10 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
 
   return (
     <div className="showComment w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)]">
-      <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden">
-        <div className="postPic bg-black flex items-center ">
+      <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden max-[600px]:flex-col">
+        <div className="postPic bg-black flex items-center max-[600px]:h-1/2 max-[600px]:justify-center">
           <img
-            className="object-contain w-full "
+            className="object-contain w-full max-[600px]:w-auto h-full"
             src={itemsData.photo}
             alt=""
           />

@@ -55,7 +55,7 @@ const CreatePost = () => {
 
   return (
     <div className="pt-16 max-[800px]:pt-0 flex justify-center">
-      <div className="createPost max-w-[600px] my-[10px] border border-[rgb(173,173,173)] rounded-lg">
+      <div className="createPost w-[500px] max-[510px]:max-w-[500px] max-[510px]:mx-3 my-[10px] border border-[rgb(173,173,173)] rounded-lg">
         {/* Header */}
         <div className="post-header flex justify-between items-center px-[10px]">
           <p className="text-xl mx-4 font-semibold">Create New Post</p>
@@ -68,7 +68,7 @@ const CreatePost = () => {
         </div>
 
         {/* Image Upload */}
-        <div className="main-div border-t border-[rgb(173,173,173)] py-2">
+        <div className="main-div border-t border-[rgb(173,173,173)] py-2 flex flex-col items-center">
           <img
             className="w-[300px] mt-[5px]"
             src="https://png.pngtree.com/png-clipart/20190920/original/pngtree-file-upload-icon-png-image_4646955.jpg"
