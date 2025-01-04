@@ -22,9 +22,12 @@ const Home = () => {
   const notify = (message) => toast.success(message);
   const notifyerr = (message) => toast.error(message);
   const [Gpostsdata, setGpostsdata] = useState([]);
+  console.log("🚀 ~ Home ~ Gpostsdata:", Gpostsdata)
   const [comment, setcomment] = useState("");
   const [OpneComment, setOpneComment] = useState(false);
   const [itemsData, setitemsData] = useState([]);
+  console.log(itemsData);
+  
   const limit = 10;
   const skip = 0;
 
@@ -120,8 +123,9 @@ const Home = () => {
                   className="text-xl cursor-pointer"
                 />
               )}
-              <p>{e.likes.length} like</p>
+              <p className="flex">{e.likes.length} like</p>
               <p>{e.body}</p>
+              <p></p>
               <p
                 onClick={() => OpnetComment(e)}
                 className="font-bold cursor-pointer"
@@ -155,7 +159,7 @@ const Home = () => {
           <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden max-[600px]:flex-col">
             <div className="postPic bg-black flex items-center max-[600px]:h-1/2 max-[600px]:justify-center">
               <img
-                className="object-contain w-full max-[600px]:w-auto"
+                className="object-contain w-full max-[600px]:w-auto h-full"
                 src={itemsData.photo}
                 alt=""
               />
@@ -166,11 +170,11 @@ const Home = () => {
                   <div>
                     <img
                       className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
-                      src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      src={itemsData.postedBy.Photo ? itemsData.postedBy.Photo : userimg}
                       alt=""
                     />
                   </div>
-                  <p className="text-lg p-[11px]">lalo</p>
+                  <p className="text-lg p-[11px]">{itemsData.postedBy.name}</p>
                 </div>
                 <button
                   onClick={() => ClosetComment()}
