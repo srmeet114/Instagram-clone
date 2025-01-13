@@ -52,20 +52,22 @@ const Navbar = ({ login }) => {
       return [
         <li key="home" className="px-[15px] py-[1px] font-medium">
           <Link to={"/"}>
-            <TiHome className="text-2xl"/>
+            <TiHome className="text-2xl" />
           </Link>
         </li>,
         <li key="profile" className="px-[15px] py-[1px] font-medium">
           <Link to={"/profile"}>
-            <FaUser className="text-xl"/>
+            <FaUser className="text-xl" />
           </Link>
         </li>,
         <li key="createPost" className="px-[15px] py-[1px] font-medium">
-          <Link to={"/createPost"}><RiAddBoxFill className="text-2xl"/></Link>
+          <Link to={"/createPost"}>
+            <RiAddBoxFill className="text-2xl" />
+          </Link>
         </li>,
         <li key="followingpost" className="px-[15px] py-[1px] font-medium">
           <Link to={"/followingpost"}>
-            <MdExplore className="text-2xl"/>
+            <MdExplore className="text-2xl" />
           </Link>
         </li>,
         <li key="" className="px-[15px] py-[1px] font-medium">
@@ -74,7 +76,7 @@ const Navbar = ({ login }) => {
               onClick={() => setmodalOpne(true)}
               className="bg-[#db183c] px-4 py-2 text-white rounded-lg active:bg-[#c71f2f]"
             >
-              <IoIosLogOut className="text-xl"/>
+              <IoIosLogOut className="text-xl" />
             </button>
           </Link>
         </li>,
@@ -92,17 +94,32 @@ const Navbar = ({ login }) => {
   };
 
   return (
-    <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0 z-10">
-
+    <div className="">
+      <div className="hidden max-[800px]:flex justify-between fixed bg_bolar max-[800px]:top-0 max-[800px]:left-0 w-full px-10 py-2">
       <Link to={"/"}>
-        <img
-          className="w-[15%] object-contain max-[500px]:w-[20%] max-[800px]:hidden"
-          src={logo}
-          alt="logo"
-        />
-      </Link>
-      <ul className="flex items-center list-none max-[800px]:hidden">{loginstatus()}</ul>
-      <ul className="hidden items-center list-none max-[800px]:flex w-full justify-evenly">{loginstatusMobile()}</ul>
+          <img
+            className="w-[18%] object-contain max-[580px]:w-[20%] max-[500px]:w-[25%] max-[425px]:w-[28%] max-[375px]:w-[35%]"
+            src={logo}
+            alt="logo"
+          />
+        </Link>
+      </div>
+      <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0 z-10">
+        <Link className="flex" to={"/"}>
+          <img
+            className="w-[18%] object-contain max-[500px]:w-[20%] max-[800px]:hidden"
+            src={logo}
+            alt="logo"
+          />
+        </Link>
+        <ul className="flex items-center list-none max-[800px]:hidden">
+          {loginstatus()}
+        </ul>
+        <ul className="hidden items-center list-none max-[800px]:flex w-full justify-evenly">
+          {loginstatusMobile()}
+        </ul>
+      </div>
+      
     </div>
   );
 };

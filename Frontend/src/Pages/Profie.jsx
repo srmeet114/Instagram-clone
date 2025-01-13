@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GetProfie } from "../server/Api/api";
 import PostDetail from "../Components/PostDetail";
 import ProfilePic from "../Modal/ProfilePic";
+import { FcLike } from "react-icons/fc";
+import { FaComment } from "react-icons/fa";
 
 const Profie = () => {
   const userimg =
@@ -13,16 +15,18 @@ const Profie = () => {
 
   const [sow, setsow] = useState(false);
   const [post, setpost] = useState([]);
+  const [post_one, setpost_one] = useState([]);
   const [user, setuser] = useState("");
   const [changePic, setchangePic] = useState(false);
 
   const OpnePostDetails = (e) => {
     setsow(true);
-    setpost(e);
+    setpost_one(e);
   };
 
   const ClosePostDetails = () => {
     setsow(false);
+    window.location.reload();
   };
 
   const ChnageProfileOpne = () => {
@@ -37,11 +41,13 @@ const Profie = () => {
     GetProfie(setpost, setuser, ChnageProfileClose);
   };
 
+
+
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex justify-center ">
-      <div className="max-w-[600px] h-max border rounded-lg">
+    <div className="pt-16 max-[800px]:pt-0 flex justify-center mb-5">
+      <div className="max-w-[600px] h-max border rounded-lg my-5">
         <div className="flex justify-around p-5">
-          <div className="h-fit">
+          <div className="h-fit cursor-pointer">
             <img
               onClick={ChnageProfileOpne}
               className="w-[160px] h-[160px] object-contain rounded-full "
@@ -67,20 +73,49 @@ const Profie = () => {
           </div>
         </div>
         <hr className="w-[90%] m-[auto] opacity-[0.8]  my-[15px] mx-[auto]" />
-        <div className="gallery flex flex-wrap">
+        <div className="gallery grid grid-cols-3 items-center gap-x-4 px-5">
           {Array.isArray(post) &&
             post.map((e, index) => (
-              <img
-                onClick={() => OpnePostDetails(e)}
+              <div
                 key={index}
-                className="w-[30%] p-[10px]"
-                src={e.photo}
-                alt=""
-              />
+                onMouseEnter={() => {(e.isHovered = true)}}
+                onMouseLeave={() => (e.isHovered = false)}
+                className="relative group h-[90%] w-full"
+              >
+                <img
+                  onClick={() => OpnePostDetails(e)}
+                  className="object-cover bg-slate-200 h-full w-full transition-opacity duration-300 group-hover:opacity-50"
+                  src={e.photo}
+                  alt=""
+                />
+                <div onClick={()=>OpnePostDetails(e)} className="absolute inset-0 flex items-center justify-center bg-[rgba(16,13,13,0.4)] bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex space-x-4">
+                    <div className="">
+                      <button className="text-white text-2xl flex gap-2 items-center">
+                        <FcLike  style={{ filter: "brightness(0) invert(1)" }} />
+                        <p className="text-xs">{e.likes.length}</p>
+                      </button>
+                    </div>
+                    <div className="">
+                      <button className="text-white text-2xl flex gap-2 items-center">
+                        <FaComment className="text-[#fff] text-md" />
+                        <p className="text-xs">{e.comments.length}</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
         </div>
       </div>
-      {sow && <PostDetail itemsData={post} userData={user} ClosetComment={ClosePostDetails} setsow={setsow} />}
+      {sow && (
+        <PostDetail
+          itemsData={post_one}
+          userData={user}
+          ClosetComment={ClosePostDetails}
+          setsow={setsow}
+        />
+      )}
       {changePic && <ProfilePic close={ChnageProfileClose} />}
     </div>
   );

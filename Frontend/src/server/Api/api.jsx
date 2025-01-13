@@ -53,9 +53,10 @@ export const postSignInData = async (
   notify,
   notifyerr,
   navigate,
-  setUserLogin
+  setUserLogin,setIsLoading
 ) => {
   try {
+    setIsLoading(true)
     const res = await axios.post(`${URL}/signin`, data);
     notify(res.data.message);
     localStorage.setItem("jwt", res.data.token);
@@ -63,9 +64,11 @@ export const postSignInData = async (
     reset();
     setUserLogin(true);
     navigate("/");
+    setIsLoading(false)
   } catch (err) {
     notifyerr(err.response.data.error);
     console.error(err);
+    setIsLoading(false)
   }
 };
 
@@ -80,19 +83,24 @@ export const postShareapi = async (
   output,
   notify,
   notifyerr,
-  navigate
+  navigate,
+  UplodImg,
+  setIsPosting
 ) => {
   try {
+    setIsPosting(true)
     const res = await axios.post(`${URL}/createPost`, { body, pic: url });
     notify(res.data.message);
     setBody("");
     setImage(null);
     setUrl("");
     output.src =
-      "https://png.pngtree.com/png-clipart/20190920/original/pngtree-file-upload-icon-png-image_4646955.jpg";
+      {UplodImg};
     navigate("/");
+    setIsPosting(false)
   } catch (err) {
     notifyerr(err.response.data.error);
+    setIsPosting(false)
   }
 };
 
@@ -135,9 +143,10 @@ export const GetProfie = async (setpost, setuser) => {
   try {
     const res = await axios.get(
       `${URL}/user/${JSON.parse(localStorage.getItem("user"))._id}`
-    );
+    ); 
     setpost(res.data.post);
     setuser(res.data.user);
+    
   } catch (err) {
     console.log(err);
   }
@@ -296,6 +305,7 @@ export const GetFollowingPost = async (setGpostsdata) => {
   try {
     const res = await axios.get(`${URL}/myfollwingpost`);
     setGpostsdata(res.data);
+    
   } catch (err) {
     console.log(err);
   }

@@ -6,6 +6,8 @@ import { GetPosts, likePost, postComment, unlikePost } from "../server/Api/api";
 import { CiHeart } from "react-icons/ci";
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { FaRegComment } from "react-icons/fa";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const Home = () => {
   const userimg =
@@ -22,14 +24,13 @@ const Home = () => {
   const notify = (message) => toast.success(message);
   const notifyerr = (message) => toast.error(message);
   const [Gpostsdata, setGpostsdata] = useState([]);
-  console.log("🚀 ~ Home ~ Gpostsdata:", Gpostsdata)
   const [comment, setcomment] = useState("");
   const [OpneComment, setOpneComment] = useState(false);
   const [itemsData, setitemsData] = useState([]);
-  console.log(itemsData);
-  
+  const [isPosting, setIsPosting] = useState(false)
+
   const limit = 10;
-  const skip = 0;
+  const [skip, setSkip] = useState(0);
 
   const OpnetComment = (e) => {
     setOpneComment(true);
@@ -57,7 +58,7 @@ const Home = () => {
       document.documentElement.clientHeight + window.pageYOffset >=
       document.documentElement.scrollHeight
     ) {
-      skip = skip + 10;
+      setSkip((prevSkip) => prevSkip + 10);
       GetPost();
     }
   };
@@ -106,29 +107,41 @@ const Home = () => {
               <img src={e.photo} alt="" />
             </div>
             <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
-              {e.likes.includes(
-                JSON.parse(localStorage.getItem("user"))._id
-              ) ? (
-                <FcLike
-                  onClick={() => {
-                    unlinkPost(e._id);
-                  }}
-                  className="text-xl cursor-pointer"
-                />
-              ) : (
-                <CiHeart
-                  onClick={() => {
-                    likesPost(e._id);
-                  }}
-                  className="text-xl cursor-pointer"
-                />
-              )}
-              <p className="flex">{e.likes.length} like</p>
+              <div className="flex">
+                <div className="">
+                  {e.likes.includes(
+                    JSON.parse(localStorage.getItem("user"))._id
+                  ) ? (
+                    <FcLike
+                      onClick={() => {
+                        unlinkPost(e._id);
+                      }}
+                      className="text-xl cursor-pointer"
+                    />
+                  ) : (
+                    <CiHeart
+                      onClick={() => {
+                        likesPost(e._id);
+                      }}
+                      className="text-xl cursor-pointer"
+                    />
+                  )}
+                  <p className="flex">{e.likes.length} like</p>
+                </div>
+                <div className="">
+                  <p
+                    className="cursor-pointer pt-1"
+                    onClick={() => OpnetComment(e)}
+                  >
+                    <FaRegComment />
+                  </p>
+                </div>
+              </div>
               <p>{e.body}</p>
               <p></p>
               <p
                 onClick={() => OpnetComment(e)}
-                className="font-bold cursor-pointer"
+                className="font-semibold cursor-pointer"
               >
                 View All comnents
               </p>
@@ -155,48 +168,53 @@ const Home = () => {
         );
       })}
       {OpneComment && (
-        <div className="showComment w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)]">
-          <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden max-[600px]:flex-col">
-            <div className="postPic bg-black flex items-center max-[600px]:h-1/2 max-[600px]:justify-center">
+        <div className="w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)] z-10 overflow-auto">
+          <div className="container flex flex-col sm:flex-row w-[80%] absolute top-[10%] left-[10%] h-auto sm:h-[80%] overscroll-contain bottom-0">
+            {/* Image Section */}
+            <div className="w-full sm:w-[40%] h-[30%] sm:h-full flex items-center justify-center bg-black">
               <img
-                className="object-contain w-full max-[600px]:w-auto h-full"
+                className="object-contain w-auto h-full lg:w-full"
                 src={itemsData.photo}
                 alt=""
               />
             </div>
-            <div className="datails w-full h-[inherit] flex flex-col">
-              <div className="flex items-center justify-between border-b">
+            {/* Content Section */}
+            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white">
+              {/* Header Section */}
+              <div className="flex items-center justify-between border-b px-3 py-2">
                 <div className="flex items-center">
-                  <div>
-                    <img
-                      className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
-                      src={itemsData.postedBy.Photo ? itemsData.postedBy.Photo : userimg}
-                      alt=""
-                    />
-                  </div>
-                  <p className="text-lg p-[11px]">{itemsData.postedBy.name}</p>
+                  <img
+                    className="rounded-full w-[40px] h-[40px] p-[5px] object-contain"
+                    src={
+                      itemsData.postedBy.Photo
+                        ? itemsData.postedBy.Photo
+                        : userimg
+                    }
+                    alt=""
+                  />
+                  <p className="text-lg ml-3">{itemsData.postedBy.name}</p>
                 </div>
-                <button
-                  onClick={() => ClosetComment()}
-                  className=" text-2xl font-bold cursor-pointer pr-3"
-                >
-                  <IoCloseSharp />
-                </button>
+                <RiDeleteBin6Fill
+                  onClick={() => RemovePost(itemsData._id)}
+                  className="text-2xl text-red-500 cursor-pointer"
+                />
               </div>
-              <div className="comment-section flex-grow-[4] h-10 overflow-y-auto">
-                {itemsData.comments.map((e, index) => {
-                  return (
-                    <p key={index} className="comm p-3">
-                      <span className="commenter font-bold">
-                        {e.postedBy.name}{" "}
-                      </span>
-                      <span className="commenttext">{e.comment}</span>
-                    </p>
-                  );
-                })}
+
+              {/* Comments Section */}
+              <div className="comment-section flex-grow overflow-y-auto h-36 px-3 py-2">
+                {itemsData.comments.map((e, index) => (
+                  <p key={index} className="comm p-2 border-b last:border-none">
+                    <span className="commenter font-bold">
+                      {e.postedBy.name}{" "}
+                    </span>
+                    <span className="commenttext">{e.comment}</span>
+                  </p>
+                ))}
               </div>
-              <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)] ">
-                <p>{itemsData.likes.length} like</p>
+
+              {/* Info Section */}
+              <div className="px-3 py-2 border-t border-gray-300">
+                <p>{itemsData.likes.length} like(s)</p>
                 <p>{itemsData.body}</p>
               </div>
               <div className="flex justify-between items-center">
@@ -215,11 +233,21 @@ const Home = () => {
                     makeComment(comment, itemsData._id), ClosetComment();
                   }}
                   className="font-medium px-3 text-[#63afe3]"
+                  
                 >
                   Post
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="fixed top-[3%] right-[5%]">
+            <button
+              onClick={() => ClosetComment()}
+              className="text-white text-2xl font-bold cursor-pointer"
+            >
+              <IoCloseSharp />
+            </button>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../public/Img/logo.png";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { postSignInData } from "../server/Api/api";
 import { toast } from "react-toastify";
@@ -14,13 +14,22 @@ const SignIn = () => {
     reset,
   } = useForm();
 
-  const {setUserLogin} = useContext(LoginContext);
+  const { setUserLogin } = useContext(LoginContext);
   const navigate = useNavigate();
   const notify = (message) => toast.success(message);
   const notifyerr = (message) => toast.error(message);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
-    postSignInData(data, reset, notify ,notifyerr ,navigate,setUserLogin);
+    postSignInData(
+      data,
+      reset,
+      notify,
+      notifyerr,
+      navigate,
+      setUserLogin,
+      setIsLoading
+    );
   };
 
   return (
@@ -81,9 +90,14 @@ const SignIn = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#4cb5f9] hover:bg-[#0b5ed7] text-white rounded-md transition duration-300 py-2 mt-4"
+                  className="w-full bg-[#4cb5f9] hover:bg-[#0b5ed7] text-white rounded-md transition duration-300 py-2 mt-4 flex items-center justify-center"
+                  disabled={isLoading}
                 >
-                  Sign In
+                  {isLoading ? (
+                    <div className="loader w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
+                  ) : (
+                    "Sign In"
+                  )}
                 </button>
               </form>
             </div>
