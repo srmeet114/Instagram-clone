@@ -27,7 +27,7 @@ const Home = () => {
   const [comment, setcomment] = useState("");
   const [OpneComment, setOpneComment] = useState(false);
   const [itemsData, setitemsData] = useState([]);
-  const [isPosting, setIsPosting] = useState(false)
+  const [isPosting, setIsPosting] = useState(false);
 
   const limit = 10;
   const [skip, setSkip] = useState(0);
@@ -107,7 +107,7 @@ const Home = () => {
               <img src={e.photo} alt="" />
             </div>
             <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
-              <div className="flex">
+              <div className="flex items-center gap-2">
                 <div className="">
                   {e.likes.includes(
                     JSON.parse(localStorage.getItem("user"))._id
@@ -116,27 +116,24 @@ const Home = () => {
                       onClick={() => {
                         unlinkPost(e._id);
                       }}
-                      className="text-xl cursor-pointer"
+                      className="text-2xl cursor-pointer active:scale-[1.2]"
                     />
                   ) : (
                     <CiHeart
                       onClick={() => {
                         likesPost(e._id);
                       }}
-                      className="text-xl cursor-pointer"
+                      className="text-2xl cursor-pointer active:scale-[1.2]"
                     />
                   )}
-                  <p className="flex">{e.likes.length} like</p>
                 </div>
-                <div className="">
-                  <p
-                    className="cursor-pointer pt-1"
-                    onClick={() => OpnetComment(e)}
-                  >
-                    <FaRegComment />
+                  <p className="cursor-pointer" onClick={() => OpnetComment(e)}>
+                    <FaRegComment className="text-xl active:scale-[1.2]" />
                   </p>
+                <div className="">
                 </div>
               </div>
+              <p className="flex">{e.likes.length} like</p>
               <p>{e.body}</p>
               <p></p>
               <p
@@ -159,7 +156,7 @@ const Home = () => {
               </div>
               <button
                 onClick={() => makeComment(comment, e._id)}
-                className="font-medium px-3 text-[#63afe3]"
+                className="font-bold px-3 text-[#63afe3]"
               >
                 Post
               </button>
@@ -233,7 +230,6 @@ const Home = () => {
                     makeComment(comment, itemsData._id), ClosetComment();
                   }}
                   className="font-medium px-3 text-[#63afe3]"
-                  
                 >
                   Post
                 </button>
