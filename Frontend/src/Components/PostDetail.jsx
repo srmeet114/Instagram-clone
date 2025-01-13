@@ -82,27 +82,6 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
                     <p>{itemsData.likes.length} like(s)</p>
                     <p>{itemsData.body}</p>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center">
-                      <MdMood className="text-2xl" />
-                      <input
-                        className="outline-none p-[10px] w-full"
-                        type="text"
-                        value={comment}
-                        onChange={(e) => setcomment(e.target.value)}
-                        placeholder="Add a comment..."
-                      />
-                    </div>
-                    <button
-                      onClick={() => {
-                        makeComment(comment, itemsData._id), ClosetComment();
-                      }}
-                      className="font-medium px-3 text-[#63afe3]"
-                      
-                    >
-                      Post
-                    </button>
-                  </div>
                 </div>
               </div>
     

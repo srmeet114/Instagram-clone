@@ -9,16 +9,16 @@ dotenv.config();
 const tokens = process.env.jwtSecret;
 
 router.post("/signup", (req, res) => {
-  const { name, userName, email, password } = req.body; // Destructuring the request body
-  if(!name || !userName || !email || !password){ // Checking all the fields are present
+  const { name, userName, email, password } = req.body;
+  if(!name || !userName || !email || !password){
       return res.status(422).json({error:"Please add all the fields"})
   }
-  USER.findOne({ $or:[{email: email},{userName: userName}] }).then((savedUser) => { // Checking email or username already exists
+  USER.findOne({ $or:[{email: email},{userName: userName}] }).then((savedUser) => {
     if (savedUser) {
       return res.status(422).json({ error: "User already exists with that email or username" });
     }
 
-    bcrypt.hash(password, 12).then((hashedpassword) => { // Hashing the password
+    bcrypt.hash(password, 12).then((hashedpassword) => {
         const user = new USER({
             name,
             userName,
@@ -26,7 +26,7 @@ router.post("/signup", (req, res) => {
             password: hashedpassword,
           });
         
-          user.save().then((user) => { // Saving the user to the database
+          user.save().then((user) => {
               res.status(200).json({ message: "User Saved Successfully" });
             }).catch((err) => {
               console.log(err);

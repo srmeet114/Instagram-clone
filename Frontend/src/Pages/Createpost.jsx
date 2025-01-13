@@ -112,7 +112,7 @@ const CreatePost = () => {
               src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Profile"
             />
-            <p className="text-sm font-medium text-gray-700">Ramesh</p>
+            <p className="text-sm font-medium text-gray-700">{JSON.parse(localStorage.getItem("user")).name}</p>
           </div>
           <textarea
             value={body}

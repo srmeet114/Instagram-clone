@@ -12,6 +12,7 @@ import { CiHeart } from "react-icons/ci";
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { FaRegComment } from "react-icons/fa";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const MyFollowing = () => {
   const userimg =
@@ -153,40 +154,53 @@ const MyFollowing = () => {
         );
       })}
       {OpneComment && (
-        <div className="showComment w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)]">
-          <div className="contauner flex w-4/5 bg-white absolute top-[10%] left-[10%] h-[500px] overflow-hidden">
-            <div className="postPic bg-black flex items-center ">
+        <div className="w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)] z-10 overflow-auto">
+          <div className="container flex flex-col sm:flex-row w-[80%] absolute top-[10%] left-[10%] h-auto sm:h-[80%] overscroll-contain bottom-0">
+            {/* Image Section */}
+            <div className="w-full sm:w-[40%] h-[30%] sm:h-full flex items-center justify-center bg-black">
               <img
-                className="object-contain w-full "
+                className="object-contain w-auto h-full lg:w-full"
                 src={itemsData.photo}
                 alt=""
               />
             </div>
-            <div className="datails w-full h-[inherit] flex flex-col">
-              <div className="flex items-center border-b">
-                <div className="">
+            {/* Content Section */}
+            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white">
+              {/* Header Section */}
+              <div className="flex items-center justify-between border-b px-3 py-2">
+                <div className="flex items-center">
                   <img
-                    className="rounded-full w-[30px] h-[auto] p-[5px] object-contain"
-                    src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    className="rounded-full w-[40px] h-[40px] p-[5px] object-contain"
+                    src={
+                      itemsData.postedBy.Photo
+                        ? itemsData.postedBy.Photo
+                        : userimg
+                    }
                     alt=""
                   />
+                  <p className="text-lg ml-3">{itemsData.postedBy.name}</p>
                 </div>
-                <p className="text-lg p-[11px]">lalo</p>
+                <RiDeleteBin6Fill
+                  onClick={() => RemovePost(itemsData._id)}
+                  className="text-2xl text-red-500 cursor-pointer"
+                />
               </div>
-              <div className="comment-section flex-grow-[4] h-10 overflow-y-auto">
-                {itemsData.comments.map((e, index) => {
-                  return (
-                    <p key={index} className="comm p-3">
-                      <span className="commenter font-bold">
-                        {e.postedBy.name}{" "}
-                      </span>
-                      <span className="commenttext">{e.comment}</span>
-                    </p>
-                  );
-                })}
+
+              {/* Comments Section */}
+              <div className="comment-section flex-grow overflow-y-auto h-36 px-3 py-2">
+                {itemsData.comments.map((e, index) => (
+                  <p key={index} className="comm p-2 border-b last:border-none">
+                    <span className="commenter font-bold">
+                      {e.postedBy.name}{" "}
+                    </span>
+                    <span className="commenttext">{e.comment}</span>
+                  </p>
+                ))}
               </div>
-              <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)] ">
-                <p>{itemsData.likes.length} like</p>
+
+              {/* Info Section */}
+              <div className="px-3 py-2 border-t border-gray-300">
+                <p>{itemsData.likes.length} like(s)</p>
                 <p>{itemsData.body}</p>
               </div>
               <div className="flex justify-between items-center">
@@ -211,7 +225,8 @@ const MyFollowing = () => {
               </div>
             </div>
           </div>
-          <div className="close-comment fixed top-[3%] right-[5%]">
+
+          <div className="fixed top-[3%] right-[5%]">
             <button
               onClick={() => ClosetComment()}
               className="text-white text-2xl font-bold cursor-pointer"
