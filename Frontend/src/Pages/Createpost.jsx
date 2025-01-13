@@ -75,7 +75,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex justify-center">
+    <div className="pt-16 max-[800px]:pt-8 flex justify-center">
       <div className="createPost w-full max-w-[500px] mx-auto my-5 border border-gray-300 rounded-lg shadow-md bg-white">
         {/* Header */}
         <div className="post-header flex justify-between items-center px-4 py-3 border-b border-gray-200">

@@ -104,7 +104,7 @@ const Navbar = ({ login }) => {
           />
         </Link>
       </div>
-      <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0 z-10">
+      <div className="flex fixed w-full justify-around py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg_bolar max-[800px]:bottom-0 max-[800px]:left-0 z-10 px-10">
         <Link className="flex" to={"/"}>
           <img
             className="w-[18%] object-contain max-[500px]:w-[20%] max-[800px]:hidden"

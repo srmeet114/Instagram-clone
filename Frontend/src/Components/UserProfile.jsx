@@ -41,12 +41,12 @@ const UserProfile = () => {
   
 
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex justify-center mb-5">
+    <div className="pt-16 max-[425px]:pt-8 flex justify-center mb-5">
       <div className="max-w-[600px] h-max border rounded-lg my-5">
         <div className="flex justify-around p-5">
           <div className="h-fit cursor-pointer">
             <img
-              className="w-[160px] h-[160px] object-contain rounded-full "
+              className="w-[160px] h-[160px] max-[425px]:w-[120px] max-[425px]:h-[120px] object-contain rounded-full "
               src={user.Photo ? user.Photo : userimg}
               alt=""
             />
@@ -63,7 +63,7 @@ const UserProfile = () => {
                     FollowUsers(user._id);
                   }
                 }}
-                className="bg-[#0097fe] text-white px-4 py-1 rounded-lg ease-in duration-200 active:scale-[1.1] hover:shadow-xl"
+                className="bg-[#0097fe] text-white px-4 py-1 rounded-lg ease-in duration-200 active:scale-[1.1] hover:shadow-xl mx-5"
               >
                 {isFollow ? "Unfollow" : "Follow"}
               </button>

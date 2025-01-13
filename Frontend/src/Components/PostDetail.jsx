@@ -37,61 +37,6 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
     };
 
   return (
-    // <div className="w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)] z-10">
-    //   <div className="container flex flex-col lg:flex-row w-[80%] bg-white absolute top-[10%] left-[10%] h-auto lg:h-[80%] overflow-hidden">
-    //     {/* Image Section */}
-    //     <div className="w-full lg:w-[40%] h-[30%] lg:h-full flex items-center justify-center bg-black">
-    //       <img
-    //         className="object-contain w-auto h-full lg:w-full"
-    //         src={itemsData.photo}
-    //         alt=""
-    //       />
-    //     </div>
-    //     {/* Content Section */}
-    //     <div className="w-full lg:w-[60%] h-auto lg:h-full flex flex-col">
-    //       {/* Header Section */}
-    //       <div className="flex items-center justify-between border-b px-3 py-2">
-    //         <div className="flex items-center">
-    //           <img
-    //             className="rounded-full w-[40px] h-[40px] p-[5px] object-contain"
-    //             src={userData.Photo || userimg}
-    //             alt=""
-    //           />
-    //           <p className="text-lg ml-3">{userData.name}</p>
-    //         </div>
-    //         <RiDeleteBin6Fill
-    //           onClick={() => RemovePost(itemsData._id)}
-    //           className="text-2xl text-red-500 cursor-pointer"
-    //         />
-    //       </div>
-
-    //       {/* Comments Section */}
-    //       <div className="comment-section flex-grow overflow-y-auto px-3 py-2">
-    //         {itemsData.comments.map((e, index) => (
-    //           <p key={index} className="comm p-2 border-b last:border-none">
-    //             <span className="commenter font-bold">{e.postedBy.name} </span>
-    //             <span className="commenttext">{e.comment}</span>
-    //           </p>
-    //         ))}
-    //       </div>
-
-    //       {/* Info Section */}
-    //       <div className="px-3 py-2 border-t border-gray-300">
-    //         <p>{itemsData.likes.length} like(s)</p>
-    //         <p>{itemsData.body}</p>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   <div className="fixed top-[3%] right-[5%]">
-    //     <button
-    //       onClick={() => setsow(false)}
-    //       className="text-white text-2xl font-bold cursor-pointer"
-    //     >
-    //       <IoCloseSharp />
-    //     </button>
-    //   </div>
-    // </div>
     <div className="w-screen min-h-screen fixed top-0 left-0 bg-[rgba(16,13,13,0.4)] z-10 overflow-auto">
               <div className="container flex flex-col sm:flex-row w-[80%] absolute top-[10%] left-[10%] h-auto sm:h-[80%] overscroll-contain bottom-0">
                 {/* Image Section */}

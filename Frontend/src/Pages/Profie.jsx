@@ -44,13 +44,13 @@ const Profie = () => {
 
 
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex justify-center mb-5">
+    <div className="pt-16 max-[425px]:pt-8 flex justify-center mb-5">
       <div className="max-w-[600px] h-max border rounded-lg my-5">
         <div className="flex justify-around p-5">
           <div className="h-fit cursor-pointer">
             <img
               onClick={ChnageProfileOpne}
-              className="w-[160px] h-[160px] object-contain rounded-full "
+              className="w-[150px] h-[150px] max-[425px]:w-[120px] max-[425px]:h-[120px] object-contain rounded-full "
               src={user.Photo ? user.Photo : userimg}
               alt=""
             />

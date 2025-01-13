@@ -84,7 +84,7 @@ const Home = () => {
   };
 
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex flex-col items-center">
+    <div className="pt-16 max-[800px]:pt-10 flex flex-col items-center">
       {Gpostsdata.map((e, index) => {
         return (
           <div

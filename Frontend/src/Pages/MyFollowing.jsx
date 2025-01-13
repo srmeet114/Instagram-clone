@@ -2,143 +2,154 @@ import React, { useEffect, useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { MdMood } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { GetFollowingPost, likePost, postComment, unlikePost } from "../server/Api/api";
+import {
+  GetFollowingPost,
+  likePost,
+  postComment,
+  unlikePost,
+} from "../server/Api/api";
 import { CiHeart } from "react-icons/ci";
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { FaRegComment } from "react-icons/fa";
 
 const MyFollowing = () => {
-
   const userimg =
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
-    const navigate = useNavigate();
-      useEffect(() => {
-        const tokeen = localStorage.getItem("jwt");
-        if (!tokeen) {
-          navigate("/signin");
-        }
-      }, []);
-    
-      const notify = (message) => toast.success(message);
-      const notifyerr = (message) => toast.error(message);
-      const [Gpostsdata, setGpostsdata] = useState([]);
-      const [comment, setcomment] = useState("");
-      const [OpneComment, setOpneComment] = useState(false);
-      const [itemsData, setitemsData] = useState([]);
-    
-      const OpnetComment = (e) => {
-        setOpneComment(true);
-        setitemsData(e);
-      };
-    
-      const ClosetComment = () => {
-        setOpneComment(false);
-      };
-    
-      useEffect(() => {
-        GetPost();
-      }, []);
-    
-      const GetPost = () => {
-        GetFollowingPost(setGpostsdata);
-      };
-    
-      const likesPost = (id) => {
-        likePost(id, Gpostsdata, setGpostsdata);
-      };
-    
-      const unlinkPost = (id) => {
-        unlikePost(id, Gpostsdata, setGpostsdata);
-      };
-    
-      const makeComment = (text, id) => {
-        postComment(text, id, setcomment, Gpostsdata, setGpostsdata,notify,notifyerr);
-      };
+  const navigate = useNavigate();
+  useEffect(() => {
+    const tokeen = localStorage.getItem("jwt");
+    if (!tokeen) {
+      navigate("/signin");
+    }
+  }, []);
+
+  const notify = (message) => toast.success(message);
+  const notifyerr = (message) => toast.error(message);
+  const [Gpostsdata, setGpostsdata] = useState([]);
+  const [comment, setcomment] = useState("");
+  const [OpneComment, setOpneComment] = useState(false);
+  const [itemsData, setitemsData] = useState([]);
+
+  const OpnetComment = (e) => {
+    setOpneComment(true);
+    setitemsData(e);
+  };
+
+  const ClosetComment = () => {
+    setOpneComment(false);
+  };
+
+  useEffect(() => {
+    GetPost();
+  }, []);
+
+  const GetPost = () => {
+    GetFollowingPost(setGpostsdata);
+  };
+
+  const likesPost = (id) => {
+    likePost(id, Gpostsdata, setGpostsdata);
+  };
+
+  const unlinkPost = (id) => {
+    unlikePost(id, Gpostsdata, setGpostsdata);
+  };
+
+  const makeComment = (text, id) => {
+    postComment(
+      text,
+      id,
+      setcomment,
+      Gpostsdata,
+      setGpostsdata,
+      notify,
+      notifyerr
+    );
+  };
   return (
-    <div className="pt-16 max-[800px]:pt-0 flex flex-col items-center">
+    <div className="pt-16 max-[800px]:pt-8 flex flex-col items-center">
       {Gpostsdata.map((e, index) => {
         return (
-          
           <div
-                      key={index}
-                      className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border rounded-lg my-3 px-3"
-                    >
-                      <div className="flex items-center">
-                        <div>
-                          <img
-                            className="rounded-full w-[30px] h-[auto] m-[5px] object-contain"
-                            src={e.postedBy.Photo ? e.postedBy.Photo : userimg}
-                            alt=""
-                          />
-                        </div>
-                        <p className="text-lg p-[11px]">
-                          <Link to={`profile/${e.postedBy._id}`}>{e.postedBy.name}</Link>
-                        </p>
-                      </div>
-                      <div className=" flex justify-center">
-                        <img src={e.photo} alt="" />
-                      </div>
-                      <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
-                        <div className="flex">
-                          <div className="">
-                            {e.likes.includes(
-                              JSON.parse(localStorage.getItem("user"))._id
-                            ) ? (
-                              <FcLike
-                                onClick={() => {
-                                  unlinkPost(e._id);
-                                }}
-                                className="text-xl cursor-pointer"
-                              />
-                            ) : (
-                              <CiHeart
-                                onClick={() => {
-                                  likesPost(e._id);
-                                }}
-                                className="text-xl cursor-pointer"
-                              />
-                            )}
-                            <p className="flex">{e.likes.length} like</p>
-                          </div>
-                          <div className="">
-                            <p
-                              className="cursor-pointer pt-1"
-                              onClick={() => OpnetComment(e)}
-                            >
-                              <FaRegComment />
-                            </p>
-                          </div>
-                        </div>
-                        <p>{e.body}</p>
-                        <p></p>
-                        <p
-                          onClick={() => OpnetComment(e)}
-                          className="font-semibold cursor-pointer"
-                        >
-                          View All comnents
-                        </p>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center">
-                          <MdMood className="text-2xl" />
-                          <input
-                            className="outline-none p-[10px]"
-                            type="text"
-                            value={comment}
-                            onChange={(e) => setcomment(e.target.value)}
-                            placeholder="Add a comment..."
-                          />
-                        </div>
-                        <button
-                          onClick={() => makeComment(comment, e._id)}
-                          className="font-medium px-3 text-[#63afe3]"
-                        >
-                          Post
-                        </button>
-                      </div>
-                    </div>
+            key={index}
+            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border rounded-lg my-3 px-3"
+          >
+            <div className="flex items-center">
+              <div>
+                <img
+                  className="rounded-full w-[30px] h-[auto] m-[5px] object-contain"
+                  src={e.postedBy.Photo ? e.postedBy.Photo : userimg}
+                  alt=""
+                />
+              </div>
+              <p className="text-lg p-[11px]">
+                <Link to={`/profile/${e.postedBy._id}`}>{e.postedBy.name}</Link>
+              </p>
+            </div>
+            <div className=" flex justify-center">
+              <img src={e.photo} alt="" />
+            </div>
+            <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
+              <div className="flex">
+                <div className="">
+                  {e.likes.includes(
+                    JSON.parse(localStorage.getItem("user"))._id
+                  ) ? (
+                    <FcLike
+                      onClick={() => {
+                        unlinkPost(e._id);
+                      }}
+                      className="text-xl cursor-pointer"
+                    />
+                  ) : (
+                    <CiHeart
+                      onClick={() => {
+                        likesPost(e._id);
+                      }}
+                      className="text-xl cursor-pointer"
+                    />
+                  )}
+                  <p className="flex">{e.likes.length} like</p>
+                </div>
+                <div className="">
+                  <p
+                    className="cursor-pointer pt-1"
+                    onClick={() => OpnetComment(e)}
+                  >
+                    <FaRegComment />
+                  </p>
+                </div>
+              </div>
+              <p>{e.body}</p>
+              <p></p>
+              <p
+                onClick={() => OpnetComment(e)}
+                className="font-semibold cursor-pointer"
+              >
+                View All comnents
+              </p>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center">
+                <MdMood className="text-2xl" />
+                <input
+                  className="outline-none p-[10px]"
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setcomment(e.target.value)}
+                  placeholder="Add a comment..."
+                />
+              </div>
+              <button
+                onClick={() => makeComment(comment, e._id)}
+                className="font-medium px-3 text-[#63afe3]"
+              >
+                Post
+              </button>
+            </div>
+          </div>
         );
       })}
       {OpneComment && (
@@ -211,7 +222,7 @@ const MyFollowing = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default MyFollowing
+export default MyFollowing;

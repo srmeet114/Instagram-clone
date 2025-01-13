@@ -35,7 +35,7 @@ const SignIn = () => {
   return (
     <div className="instagram">
       <section>
-        <div className="h-lvh flex pt-20 max-[800px]:pt-5">
+        <div className="h-lvh flex pt-20 ">
           <div className="container mx-auto max-[608px]:px-5">
             <div className="form-signin m-auto border border-gray-300 rounded-md py-4 px-6 w-1/3 max-[768px]:w-1/2 max-[608px]:w-full max-[425px]:border-0 bg_bolar shadow-lg">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -101,7 +101,7 @@ const SignIn = () => {
                 </button>
               </form>
             </div>
-            <div className="form-signin m-auto border border-gray-300 rounded-md p-4 w-1/3 max-[768px]:w-1/2 max-[425px]:w-full mt-4 bg_bolar">
+            <div className="form-signin m-auto border border-gray-300 rounded-md p-4 w-1/3 max-[768px]:w-1/2 max-[608px]:w-full max-[425px]:w-full mt-4 bg_bolar">
               <p className="text-center text-sm">
                 Don't have an account?
                 <Link
