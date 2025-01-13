@@ -151,7 +151,7 @@ router.delete("/deletePost/:_id",requireLogin,async(req,res)=>{
 router.get("/myfollwingpost",requireLogin,(req,res)=>{
   try{
     POST.find({postedBy:{$in:req.user.following}})
-    .populate("postedBy","_id name")
+    .populate("postedBy","_id name Photo")
     .populate("comments.postedBy","_id name")
     .then(posts=>{
       res.status(200).json(posts)
