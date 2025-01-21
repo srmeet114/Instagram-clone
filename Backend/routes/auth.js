@@ -73,7 +73,7 @@ router.post("/googleLogin", async (req,res)=>{
     });
 
     if (savedUser) {
-      const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+      const token = jwt.sign({ _id: savedUser._id }, process.env.jwtSecret, { expiresIn: "7d" });
       return res.json({ token, user: savedUser });
     }
 
@@ -88,7 +88,7 @@ router.post("/googleLogin", async (req,res)=>{
 
     await newUser.save();
 
-    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ _id: newUser._id }, process.env.jwtSecret, { expiresIn: "7d" });
 
     return res.json({ token, user: newUser });
 
