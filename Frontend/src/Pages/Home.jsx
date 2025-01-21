@@ -27,7 +27,6 @@ const Home = () => {
   const [comment, setcomment] = useState("");
   const [OpneComment, setOpneComment] = useState(false);
   const [itemsData, setitemsData] = useState([]);
-  const [isPosting, setIsPosting] = useState(false);
 
   const limit = 10;
   const [skip, setSkip] = useState(0);

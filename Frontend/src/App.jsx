@@ -15,8 +15,8 @@ import MyFollowing from "./Pages/MyFollowing";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
-  const [userLogin, setUserLogin] = useState(false);
-  const [modalOpne, setmodalOpne] = useState(false);
+  const [userLogin, setUserLogin] = useState(false); // state for login
+  const [modalOpne, setmodalOpne] = useState(false); // modal opne for logout
 
   return (
     <BrowserRouter>
@@ -32,7 +32,7 @@ function App() {
             <Route path="/profile/:_id" element={<UserProfile />} />
             <Route path="/followingpost" element={<MyFollowing />} />
           </Routes>
-          <ToastContainer theme="dark" />
+          <ToastContainer theme="dark" /> {/* notification react-toastify */}
           {modalOpne && <LogoutModal />}
         </LoginContext.Provider>
       </GoogleOAuthProvider>

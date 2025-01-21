@@ -59,36 +59,42 @@ router.post("/signin",(req,res)=>{
     })
 })
 
-router.post("/googleLogin",(req,res)=>{
-  const {email_verified,email,name,clientId,userName,Photo}=req.body;
-  if(email_verified){
-    USER.findOne({email:email}).then((savedUser)=>{
-      if(savedUser){
-        const token = jwt.sign({_id:savedUser._id},jwtDetail)
-        const {_id,name,email,userName} = savedUser;
-        res.status(200).json({token,message:"Successfully signed in",user:{_id,name,email,userName}})
-      }else{
-        const password = email + clientId
-        const user = new USER({
-          name,
-          userName,
-          email,
-          password: password,
-          Photo
-        });
-      
-        user.save().then((user) => { // Saving the user to the database
-          let userId = user._id.toString()
-          const token = jwt.sign({_id:userId},tokens)
-          const {_id,name,email,userName} = user;
-          res.status(200).json({token,message:"Successfully signed in",user:{_id,name,email,userName}})
-          }).catch((err) => {
-            console.log(err);
-          }); 
-      }
-  }).catch(err=>{
-      console.log(err)
-  })
+router.post("/googleLogin", async (req,res)=>{
+  try {
+    const { email_verified, email, name, clientId, userName, Photo } = req.body;
+
+    if (!email_verified) {
+      return res.status(400).json({ error: "Email is not verified!" });
+    }
+
+    let savedUser = await USER.findOne({ email }).catch((err) => {
+      console.error("Database error:", err);
+      return res.status(500).json({ error: "Database error" });
+    });
+
+    if (savedUser) {
+      const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+      return res.json({ token, user: savedUser });
+    }
+
+    const password = email + clientId;
+    const newUser = new USER({
+      name,
+      email,
+      userName,
+      password,
+      Photo,
+    });
+
+    await newUser.save();
+
+    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+    return res.json({ token, user: newUser });
+
+  } catch (error) {
+    console.error("Google Login Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 })
 
