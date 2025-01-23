@@ -70,14 +70,14 @@ const MyFollowing = () => {
     );
   };
   return (
-    <div className="pt-16 max-[800px]:pt-8 flex flex-col items-center">
+    <div className="pt-16 max-[800px]:pt-8 flex flex-col items-center dark:bg-[#121212] transition duration-300">
       {Gpostsdata.map((e, index) => {
         return (
           <div
             key={index}
-            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border rounded-lg my-3 px-3"
+            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border dark:border-[#1e1e1f] rounded-lg my-3 dark:bg-[#1e1e1f] transition duration-300"
           >
-            <div className="flex items-center">
+            <div className="flex items-center px-3">
               <div>
                 <img
                   className="rounded-full w-[30px] h-[auto] m-[5px] object-contain"
@@ -85,14 +85,14 @@ const MyFollowing = () => {
                   alt=""
                 />
               </div>
-              <p className="text-lg p-[11px]">
+              <p className="text-lg p-[11px] dark:text-white transition duration-300">
                 <Link to={`/profile/${e.postedBy._id}`}>{e.postedBy.name}</Link>
               </p>
             </div>
             <div className=" flex justify-center">
               <img src={e.photo} alt="" />
             </div>
-            <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
+            <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)] dark:text-white transition duration-300">
               <div className="flex">
                 <div className="">
                   {e.likes.includes(
@@ -132,11 +132,11 @@ const MyFollowing = () => {
                 View All comnents
               </p>
             </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <MdMood className="text-2xl" />
+            <div className="grid grid-cols-4 px-3">
+              <div className="flex items-center col-span-3">
+                <MdMood className="text-2xl dark:text-white transition duration-300" />
                 <input
-                  className="outline-none p-[10px]"
+                  className="outline-none p-[10px] w-full bg-transparent dark:text-white"
                   type="text"
                   value={comment}
                   onChange={(e) => setcomment(e.target.value)}
@@ -145,7 +145,7 @@ const MyFollowing = () => {
               </div>
               <button
                 onClick={() => makeComment(comment, e._id)}
-                className="font-medium px-3 text-[#63afe3]"
+                className="font-medium px-3 text-[#63afe3] text-right"
               >
                 Post
               </button>
@@ -165,7 +165,7 @@ const MyFollowing = () => {
               />
             </div>
             {/* Content Section */}
-            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white">
+            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white dark:bg-[#121212] transition duration-300">
               {/* Header Section */}
               <div className="flex items-center justify-between border-b px-3 py-2">
                 <div className="flex items-center">
@@ -178,7 +178,7 @@ const MyFollowing = () => {
                     }
                     alt=""
                   />
-                  <p className="text-lg ml-3">{itemsData.postedBy.name}</p>
+                  <p className="text-lg ml-3 dark:text-white transition duration-300">{itemsData.postedBy.name}</p>
                 </div>
                 <RiDeleteBin6Fill
                   onClick={() => RemovePost(itemsData._id)}
@@ -190,24 +190,24 @@ const MyFollowing = () => {
               <div className="comment-section flex-grow overflow-y-auto h-36 px-3 py-2">
                 {itemsData.comments.map((e, index) => (
                   <p key={index} className="comm p-2 border-b last:border-none">
-                    <span className="commenter font-bold">
+                    <span className="commenter font-bold dark:text-white  ">
                       {e.postedBy.name}{" "}
                     </span>
-                    <span className="commenttext">{e.comment}</span>
+                    <span className="commenttext dark:text-white">{e.comment}</span>
                   </p>
                 ))}
               </div>
 
               {/* Info Section */}
               <div className="px-3 py-2 border-t border-gray-300">
-                <p>{itemsData.likes.length} like(s)</p>
-                <p>{itemsData.body}</p>
+                <p className="dark:text-white transition duration-300">{itemsData.likes.length} like(s)</p>
+                <p className="dark:text-white transition duration-300">{itemsData.body}</p>
               </div>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <MdMood className="text-2xl" />
+              <div className="grid grid-cols-4 px-3">
+                <div className="flex items-center col-span-3">
+                  <MdMood className="text-2xl dark:text-white transition duration-300" />
                   <input
-                    className="outline-none p-[10px] w-full"
+                    className="outline-none p-[10px] w-full bg-transparent dark:text-white"
                     type="text"
                     value={comment}
                     onChange={(e) => setcomment(e.target.value)}
@@ -218,7 +218,7 @@ const MyFollowing = () => {
                   onClick={() => {
                     makeComment(comment, itemsData._id), ClosetComment();
                   }}
-                  className="font-medium px-3 text-[#63afe3]"
+                  className="font-medium px-3 text-[#63afe3] text-right"
                 >
                   Post
                 </button>

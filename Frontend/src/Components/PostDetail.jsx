@@ -48,7 +48,7 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
                   />
                 </div>
                 {/* Content Section */}
-                <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white">
+                <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white dark:bg-[#121212] transition duration-300">
                   {/* Header Section */}
                   <div className="flex items-center justify-between border-b px-3 py-2">
                     <div className="flex items-center">
@@ -57,7 +57,7 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
                         src={userData.Photo || userimg}
                         alt=""
                       />
-                      <p className="text-lg ml-3">{userData.name}</p>
+                      <p className="text-lg ml-3 dark:text-white transition duration-300">{userData.name}</p>
                     </div>
                     <RiDeleteBin6Fill
                       onClick={() => RemovePost(itemsData._id)}
@@ -69,18 +69,18 @@ const PostDetail = ({ itemsData, ClosetComment, userData, setsow }) => {
                   <div className="comment-section flex-grow overflow-y-auto h-36 px-3 py-2">
                     {itemsData.comments.map((e, index) => (
                       <p key={index} className="comm p-2 border-b last:border-none">
-                        <span className="commenter font-bold">
+                        <span className="commenter font-bold dark:text-white transition duration-300">
                           {e.postedBy.name}{" "}
                         </span>
-                        <span className="commenttext">{e.comment}</span>
+                        <span className="commenttext text-white transition duration-300">{e.comment}</span>
                       </p>
                     ))}
                   </div>
     
                   {/* Info Section */}
                   <div className="px-3 py-2 border-t border-gray-300">
-                    <p>{itemsData.likes.length} like(s)</p>
-                    <p>{itemsData.body}</p>
+                    <p className="dark:text-white transition duration-300">{itemsData.likes.length} like(s)</p>
+                    <p className="dark:text-white transition duration-300">{itemsData.body}</p>
                   </div>
                 </div>
               </div>

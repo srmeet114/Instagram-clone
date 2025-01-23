@@ -91,11 +91,11 @@ const Navbar = ({ login }) => {
       ];
     } else {
       return [
-        <li key="signup" className="px-[15px] py-[1px] font-medium">
-          <Link to={"/signup"}>SignUp</Link>
-        </li>,
         <li key="Signin" className="px-[15px] py-[1px] font-medium">
           <Link to={"/Signin"}>SignIn</Link>
+        </li>,
+        <li key="signup" className="px-[15px] py-[1px] font-medium">
+          <Link to={"/signup"}>SignUp</Link>
         </li>,
       ];
     }
@@ -103,7 +103,7 @@ const Navbar = ({ login }) => {
 
   return (
     <div className="">
-      <div className="hidden max-[800px]:flex justify-between fixed bg-white dark:bg-[#1e1e1f] bg-opacity-80 backdrop-blur-sm rounded-b-lg border border-white border-opacity-20 max-[800px]:top-0 max-[800px]:left-0 w-full px-5 py-2 transition duration-300">
+      <div className="hidden max-[800px]:flex justify-between fixed bg-white dark:bg-[#1e1e1f] bg-opacity-80 backdrop-blur-sm rounded-b-lg border border-white border-opacity-20 max-[800px]:top-0 max-[800px]:left-0 w-full px-5 py-2 transition duration-300 z-10">
         <Link to={"/"} className="flex">
           <img
             className="w-[25%] object-contain max-[580px]:w-[25%] max-[500px]:w-[30%] max-[425px]:w-[40%] max-[375px]:w-[35%] dark:filter dark:invert dark:brightness-0 transition duration-300"
@@ -131,7 +131,7 @@ const Navbar = ({ login }) => {
         </div>
       </div>
       <div className="grid grid-cols-3 fixed w-full py-[10px] shadow-lg max-[800px]:py-[0px] max-[800px]:shadow-none bg-white dark:bg-[#1e1e1f] bg-opacity-80 backdrop-blur-sm rounded-t-lg border border-white border-opacity-20 max-[800px]:bottom-0 max-[800px]:left-0 z-10 transition duration-300">
-        <Link className="flex items-center" to={"/"}>
+        <Link className="flex items-center ps-5" to={"/"}>
           <img
             className="h-[2rem] object-contain max-[500px]:w-[20%] max-[800px]:hidden dark:filter dark:invert dark:brightness-0 transition duration-300"
             src={logo}

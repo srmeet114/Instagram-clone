@@ -175,7 +175,7 @@ const Home = () => {
               />
             </div>
             {/* Content Section */}
-            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white">
+            <div className="w-full sm:w-[60%] h-auto sm:h-full flex flex-col bg-white dark:bg-[#121212] transition duration-300">
               {/* Header Section */}
               <div className="flex items-center justify-between border-b px-3 py-2">
                 <div className="flex items-center">
@@ -188,7 +188,7 @@ const Home = () => {
                     }
                     alt=""
                   />
-                  <p className="text-lg ml-3">{itemsData.postedBy.name}</p>
+                  <p className="text-lg ml-3 dark:text-white transition duration-300">{itemsData.postedBy.name}</p>
                 </div>
                 <RiDeleteBin6Fill
                   onClick={() => RemovePost(itemsData._id)}
@@ -200,24 +200,24 @@ const Home = () => {
               <div className="comment-section flex-grow overflow-y-auto h-36 px-3 py-2">
                 {itemsData.comments.map((e, index) => (
                   <p key={index} className="comm p-2 border-b last:border-none">
-                    <span className="commenter font-bold">
-                      {e.postedBy.name}{" "}
+                    <span className="commenter font-bold dark:text-white transition duration-300">
+                      {e.postedBy.name}{" : "}
                     </span>
-                    <span className="commenttext">{e.comment}</span>
+                    <span className="commenttext text-white transition duration-300">{e.comment}</span>
                   </p>
                 ))}
               </div>
 
               {/* Info Section */}
               <div className="px-3 py-2 border-t border-gray-300">
-                <p>{itemsData.likes.length} like(s)</p>
-                <p>{itemsData.body}</p>
+                <p className="dark:text-white transition duration-300">{itemsData.likes.length} like(s)</p>
+                <p className="dark:text-white transition duration-300">{itemsData.body}</p>
               </div>
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <MdMood className="text-2xl" />
+              <div className="grid grid-cols-4 px-3">
+                <div className="flex items-center col-span-3">
+                  <MdMood className="text-2xl dark:text-white transition duration-300" />
                   <input
-                    className="outline-none p-[10px] w-full"
+                    className="outline-none p-[10px] w-full bg-transparent dark:text-white"
                     type="text"
                     value={comment}
                     onChange={(e) => setcomment(e.target.value)}
@@ -228,7 +228,7 @@ const Home = () => {
                   onClick={() => {
                     makeComment(comment, itemsData._id), ClosetComment();
                   }}
-                  className="font-medium px-3 text-[#63afe3]"
+                  className="font-medium px-3 text-[#63afe3] text-right"
                 >
                   Post
                 </button>

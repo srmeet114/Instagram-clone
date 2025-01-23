@@ -32,15 +32,15 @@ const SignUp = () => {
   };
 
   return (
-    <div className="instagram">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] dark:bg-gradient-to-br dark:from-[#121212] dark:via-[#121212] dark:to-[#121212] transition duration-300">
       <section>
         <div className="h-lvh flex pt-20">
           <div className="container mx-auto max-[608px]:px-5">
-            <div className="form-signin m-auto border border-gray-300 rounded-md py-4 px-6 w-1/3 max-[768px]:w-1/2 max-[608px]:w-full max-[425px]:border-0 bg_bolar shadow-lg">
+            <div className="form-signin m-auto bg-white bg-opacity-80 backdrop-blur-sm rounded-lg border border-white border-opacity-20 dark:bg-[#1e1e1f] py-4 px-6 w-1/3 max-[768px]:w-1/2 max-[608px]:w-full max-[425px]:border-0 shadow-lg transition duration-300">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex justify-center mb-4">
                   <img
-                    className="w-[40%] object-contain py-10"
+                    className="w-[40%] object-contain py-10 dark:filter dark:invert dark:brightness-0 transition duration-300"
                     src={logo}
                     alt="logo"
                   />
@@ -114,7 +114,7 @@ const SignUp = () => {
                     </p>
                   )}
                 </div>
-                <div className="text-center text-sm text-gray-500 mt-2">
+                <div className="text-center text-sm text-gray-500 mt-2 dark:text-white">
                   <p>
                     By signing up, you agree to our
                     <a className="text-blue-500 hover:underline pl-1">Terms</a>,
@@ -136,8 +136,8 @@ const SignUp = () => {
                 </button>
               </form>
             </div>
-            <div className="form-signin m-auto border border-gray-300 rounded-md p-4 w-1/3 max-[768px]:w-1/2 max-[425px]:w-full mt-4 bg_bolar">
-              <p className="text-center text-sm text-gray-500">
+            <div className="form-signin m-auto bg-white bg-opacity-80 backdrop-blur-sm rounded-lg border border-white border-opacity-20 dark:bg-[#1e1e1f] py-4 px-6 w-1/3 max-[768px]:w-1/2 max-[608px]:w-full max-[425px]:border-0 shadow-lg transition duration-300 mt-4">
+              <p className="text-center text-sm text-gray-500 dark:text-white">
                 Have an account ?
                 <Link
                   to="/signin"

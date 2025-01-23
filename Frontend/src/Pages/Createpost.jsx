@@ -75,18 +75,19 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="pt-16 max-[800px]:pt-8 flex justify-center">
-      <div className="createPost w-full max-w-[500px] mx-auto my-5 border border-gray-300 rounded-lg shadow-md bg-white">
+    <div className="h-screen dark:bg-[#121212]">
+    <div className="pt-16 max-[800px]:pt-8 flex justify-center dark:bg-[#121212]">
+      <div className="createPost w-full max-w-[500px] mx-auto my-5 border border-gray-300 rounded-lg shadow-md bg-white dark:bg-[#1e1e1f] transition duration-300">
         {/* Header */}
         <div className="post-header flex justify-between items-center px-4 py-3 border-b border-gray-200">
-          <p className="text-lg font-semibold text-gray-700">Create New Post</p>
+          <p className="text-lg font-semibold text-gray-700 dark:text-white">Create New Post</p>
         </div>
 
         {/* Image Upload */}
         <div className="main-div py-4 flex flex-col items-center">
           <img
             onClick={handleClick}
-            className="w-[300px] h-[300px] object-cover rounded-md cursor-pointer"
+            className="w-[300px] h-[300px] object-cover rounded-md cursor-pointer dark:filter dark:invert dark:brightness-0 transition duration-300"
             src={UplodImg}
             id="output"
             alt="Upload"
@@ -112,19 +113,19 @@ const CreatePost = () => {
               src="https://images.unsplash.com/photo-1692261853713-4d283f65a6ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Profile"
             />
-            <p className="text-sm font-medium text-gray-700">{JSON.parse(localStorage.getItem("user")).name}</p>
+            <p className="text-lg font-medium text-gray-700 dark:text-white">{JSON.parse(localStorage.getItem("user")).name}</p>
           </div>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none text-gray-700"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200 focus:outline-none text-gray-700 dark:bg-transparent dark:text-white"
             rows="3"
             placeholder="Write a caption..."
           ></textarea>
           <div className="px-4 py-3 border-t border-gray-200 flex justify-end">
             <button
               onClick={uploadImage}
-              className="bg-blue-500 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-600 transition-colors flex items-center"
+              className="bg-blue-500 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-600 transition-colors flex items-center mb-5"
               disabled={isPosting}
             >
               {isPosting ? (
@@ -139,6 +140,7 @@ const CreatePost = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
