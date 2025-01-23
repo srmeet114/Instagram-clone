@@ -4,6 +4,7 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import { LoginContext } from "./context/loginContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { DarkLiteProvider } from "./context/DarkLiteContext";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Navbar = lazy(() => import("./Components/Navbar"));
@@ -13,6 +14,9 @@ const Profie = lazy(() => import("./Pages/Profie"));
 const Createpost = lazy(() => import("./Pages/Createpost"));
 const UserProfile = lazy(() => import("./Components/UserProfile"));
 const MyFollowing = lazy(() => import("./Pages/MyFollowing"));
+const LogoutModal = lazy(() => import("./Modal/LogoutModal"));
+const LiveChate = lazy(() => import("./Pages/LiveChate"));
+
 
 const Loader = () => (
   <div className="h-screen flex items-center justify-center ">
@@ -29,6 +33,7 @@ function App() {
       <BrowserRouter>
         <GoogleOAuthProvider clientId="1050742084132-j9bq9adpdkk31hhll0g6libdp68p99bk.apps.googleusercontent.com">
           <LoginContext.Provider value={{ setUserLogin, setmodalOpne }}>
+            <DarkLiteProvider>
             <Navbar login={userLogin} />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -38,9 +43,11 @@ function App() {
               <Route path="/createPost" element={<Createpost />} />
               <Route path="/profile/:_id" element={<UserProfile />} />
               <Route path="/followingpost" element={<MyFollowing />} />
+              <Route path="/LiveChate" element={<LiveChate />} />
             </Routes>
             <ToastContainer theme="dark" /> {/* notification react-toastify */}
             {modalOpne && <LogoutModal />}
+            </DarkLiteProvider>
           </LoginContext.Provider>
         </GoogleOAuthProvider>
       </BrowserRouter>

@@ -83,14 +83,14 @@ const Home = () => {
   };
 
   return (
-    <div className="pt-16 max-[800px]:pt-10 flex flex-col items-center">
+    <div className="pt-16 max-[800px]:pt-12 flex flex-col items-center dark:bg-[#121212] transition duration-300">
       {Gpostsdata.map((e, index) => {
         return (
           <div
             key={index}
-            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border rounded-lg my-3 px-3"
+            className="w-[500px] max-w-full sm:w-[500px] sm:mx-auto h-max border dark:border-[#1e1e1f] rounded-lg my-3 dark:bg-[#1e1e1f] transition duration-300"
           >
-            <div className="flex items-center">
+            <div className="flex items-center px-3">
               <div>
                 <img
                   className="rounded-full w-[30px] h-[auto] m-[5px] object-contain"
@@ -98,14 +98,14 @@ const Home = () => {
                   alt=""
                 />
               </div>
-              <p className="text-lg p-[11px]">
+              <p className="text-lg p-[11px] dark:text-white transition duration-300">
                 <Link to={`profile/${e.postedBy._id}`}>{e.postedBy.name}</Link>
               </p>
             </div>
             <div className=" flex justify-center">
               <img src={e.photo} alt="" />
             </div>
-            <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)]">
+            <div className="line-[4px] px-[10px] py-[3px] border-b border-[rgb(173,173,173)] dark:text-white transition duration-300">
               <div className="flex items-center gap-2">
                 <div className="">
                   {e.likes.includes(
@@ -142,11 +142,11 @@ const Home = () => {
                 View All comnents
               </p>
             </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <MdMood className="text-2xl" />
+            <div className="grid grid-cols-4 px-3">
+              <div className="flex items-center col-span-3">
+                <MdMood className="text-2xl dark:text-white transition duration-300" />
                 <input
-                  className="outline-none p-[10px]"
+                  className="outline-none m-[10px] w-full bg-transparent dark:text-white "
                   type="text"
                   value={comment}
                   onChange={(e) => setcomment(e.target.value)}
@@ -155,7 +155,7 @@ const Home = () => {
               </div>
               <button
                 onClick={() => makeComment(comment, e._id)}
-                className="font-bold px-3 text-[#63afe3]"
+                className="font-bold text-[#63afe3] text-right"
               >
                 Post
               </button>
