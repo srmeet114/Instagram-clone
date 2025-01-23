@@ -96,7 +96,7 @@ const Navbar = ({ login }) => {
   return (
     <div className="">
       <div className="hidden max-[800px]:flex justify-between fixed bg_bolar max-[800px]:top-0 max-[800px]:left-0 w-full px-10 py-2">
-      <Link to={"/"}>
+        <Link to={"/"}>
           <img
             className="w-[18%] object-contain max-[580px]:w-[20%] max-[500px]:w-[25%] max-[425px]:w-[28%] max-[375px]:w-[35%]"
             src={logo}
@@ -119,7 +119,6 @@ const Navbar = ({ login }) => {
           {loginstatusMobile()}
         </ul>
       </div>
-      
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = "https://instagram-clone-saf1.onrender.com";
+// const URL = "https://instagram-clone-saf1.onrender.com";
+const URL = "http://localhost:5000";
 
 axios.interceptors.request.use(
   (config) => {
