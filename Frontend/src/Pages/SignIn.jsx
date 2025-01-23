@@ -33,7 +33,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] dark:bg-gradient-to-br dark:from-[#121212] dark:via-[#121212] dark:to-[#121212] transition duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] dark:bg-gradient-to-br dark:from-[#121212] dark:via-[#121212] dark:to-[#121212] transition duration-300">
       <section>
         <div className="h-lvh flex pt-20 ">
           <div className="container mx-auto max-[608px]:px-5">

@@ -42,14 +42,15 @@ const Profie = () => {
   };
 
   return (
+    <div className="h-screen dark:bg-[#121212] transition duration-300">
     <div className="h-full dark:bg-[#121212] transition duration-300 pb-5">
-      <div className="pt-16 max-[425px]:pt-8 flex justify-center">
-        <div className="max-w-[600px] h-max border rounded-lg my-5 dark:bg-[#1e1e1f] transition duration-300">
+      <div className="pt-16 max-[425px]:pt-12 flex justify-center">
+        <div className="max-w-[600px] h-max border max-[425px]:border-0 rounded-lg my-5 dark:bg-[#1e1e1f] transition duration-300">
           <div className="flex justify-around p-5">
             <div className="h-fit cursor-pointer">
               <img
                 onClick={ChnageProfileOpne}
-                className="w-[150px] h-[150px] max-[425px]:w-[120px] max-[425px]:h-[120px] object-contain rounded-full "
+                className="w-[150px] h-[150px] max-[425px]:w-[120px] max-[425px]:h-[120px] max-[375px]:w-[90px] max-[375px]:h-[90px] object-contain rounded-full"
                 src={user.Photo ? user.Photo : userimg}
                 alt=""
               />
@@ -72,7 +73,7 @@ const Profie = () => {
             </div>
           </div>
           <hr className="w-[90%] m-[auto] opacity-[0.8]  my-[15px] mx-[auto]" />
-          <div className="gallery grid grid-cols-3 items-center gap-x-4 px-5">
+          <div className="gallery grid grid-cols-3 items-center gap-x-4 px-5 h-[25rem] overflow-auto">
             {Array.isArray(post) &&
               post.map((e, index) => (
                 <div
@@ -124,6 +125,7 @@ const Profie = () => {
         )}
         {changePic && <ProfilePic close={ChnageProfileClose} />}
       </div>
+    </div>
     </div>
   );
 };

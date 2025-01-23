@@ -32,7 +32,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] dark:bg-gradient-to-br dark:from-[#121212] dark:via-[#121212] dark:to-[#121212] transition duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] dark:bg-gradient-to-br dark:from-[#121212] dark:via-[#121212] dark:to-[#121212] transition duration-300">
       <section>
         <div className="h-lvh flex pt-20">
           <div className="container mx-auto max-[608px]:px-5">
@@ -121,6 +121,7 @@ const SignUp = () => {
                     <a className="text-blue-500 hover:underline pr-1">
                       Privacy Policy
                     </a>
+                    <br />
                     and
                     <a className="text-blue-500 hover:underline pl-1">
                       Cookies Policy
