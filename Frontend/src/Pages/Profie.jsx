@@ -73,7 +73,8 @@ const Profie = () => {
             </div>
           </div>
           <hr className="w-[90%] m-[auto] opacity-[0.8]  my-[15px] mx-[auto]" />
-          <div className="gallery grid grid-cols-3 items-center gap-x-4 px-5 h-[25rem] overflow-auto">
+          <div className="h-[25rem] overflow-auto">
+          <div className="gallery grid grid-cols-3 items-center gap-x-4 px-5 ">
             {Array.isArray(post) &&
               post.map((e, index) => (
                 <div
@@ -113,6 +114,7 @@ const Profie = () => {
                   </div>
                 </div>
               ))}
+          </div>
           </div>
         </div>
         {sow && (
