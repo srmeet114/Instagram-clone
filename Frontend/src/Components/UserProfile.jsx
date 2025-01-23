@@ -38,6 +38,18 @@ const UserProfile = () => {
   };
 
   const [sow, setsow] = useState(false);
+  const [post_one, setpost_one] = useState([]);
+  
+
+  const OpnePostDetails = (e) => {
+    setsow(true);
+    setpost_one(e);
+  };
+
+  const ClosePostDetails = () => {
+    setsow(false);
+    window.location.reload();
+  };
 
   return (
     <div className="h-screen dark:bg-[#121212] transition duration-300">

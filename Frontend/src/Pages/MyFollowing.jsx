@@ -70,7 +70,7 @@ const MyFollowing = () => {
     );
   };
   return (
-    <div className="pt-16 max-[800px]:pt-8 flex flex-col items-center dark:bg-[#121212] transition duration-300">
+    <div className="pt-16 max-[800px]:pt-12 flex flex-col items-center dark:bg-[#121212] transition duration-300">
       {Gpostsdata.map((e, index) => {
         return (
           <div

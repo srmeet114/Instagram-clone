@@ -115,14 +115,14 @@ const Navbar = ({ login }) => {
     const token = localStorage.getItem("jwt");
     if (login || token) {
       return [
-        <Link to={"/"} className="flex">
+        <Link key="img" to={"/"} className="flex">
           <img
             className="w-[25%] object-contain max-[580px]:w-[25%] max-[500px]:w-[30%] max-[425px]:w-[40%] max-[375px]:w-[35%] dark:filter dark:invert dark:brightness-0 transition duration-300"
             src={logo}
             alt="logo"
           />
         </Link>,
-        <div className="py-[1px] font-medium flex">
+        <div key="button" className="py-[1px] font-medium flex">
           <button
             onClick={toggleDarkMode}
             className={`px-4 py-2 rounded ${
@@ -131,14 +131,14 @@ const Navbar = ({ login }) => {
           >
             {isDarkMode ? <MdSunny /> : <MdDarkMode />}
           </button>
-          <Link to={""}>
+          <div>
             <button
               onClick={() => setmodalOpne(true)}
               className="bg-[#db183c] dark:bg-[#a73333] px-4 py-2 text-white rounded-lg active:bg-[#c71f2f]"
             >
               <IoIosLogOut className="text-xl" />
             </button>
-          </Link>
+          </div>
         </div>,
       ];
     } else {
